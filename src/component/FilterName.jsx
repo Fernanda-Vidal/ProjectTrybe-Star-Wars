@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
 
-function Forms() {
+function FilterName() {
   const {
     filterByName,
     addFilterName,
@@ -19,4 +19,4 @@ function Forms() {
   );
 }
 
-export default Forms;
+export default FilterName;

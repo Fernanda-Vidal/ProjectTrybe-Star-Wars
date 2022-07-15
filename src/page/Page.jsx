@@ -5,7 +5,6 @@ import Table from '../component/Table';
 function Page() {
   return (
     <div>
-      {/* <Forms /> */}
       <Table />
     </div>
   );

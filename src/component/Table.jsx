@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
 import ByPlanet from './ByPlanet';
-import Forms from './Forms';
+import FilterColumm from './FilterColumm';
+import FilterName from './FilterName';
 
 function Table() {
   const { data, filterByName } = useContext(StarWarsContext);
@@ -10,7 +11,8 @@ function Table() {
     <div>
       <header>
         <h1>PROJETO STAR WARS - TRYBE</h1>
-        <Forms />
+        <FilterName />
+        <FilterColumm />
       </header>
       { filterByName.name && <ByPlanet /> }
       { !filterByName.name
