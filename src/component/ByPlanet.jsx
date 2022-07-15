@@ -8,7 +8,22 @@ function ByPlanet() {
     .filter((planet) => planet.name.includes(filterByName.name));
 
   return (
-    <div>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Rotation Period</th>
+        <th>Orbital Period</th>
+        <th>Diameter</th>
+        <th>Climate</th>
+        <th>Gravity</th>
+        <th>Terrain</th>
+        <th>Surface Water</th>
+        <th>Population</th>
+        <th>Films</th>
+        <th>Created</th>
+        <th>Edited</th>
+        <th>URL</th>
+      </tr>
       { planetFiltered()?.map((filtered, i) => (
         <tr key={ i + 1 }>
           <td>{filtered.name}</td>
@@ -26,7 +41,7 @@ function ByPlanet() {
           <td>{filtered.url}</td>
         </tr>
       ))}
-    </div>
+    </table>
   );
 }
 
