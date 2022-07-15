@@ -1,10 +1,11 @@
 import React from 'react';
-import Table from './Table';
+import Forms from '../component/Forms';
+import Table from '../component/Table';
 
 function Page() {
   return (
     <div>
-      <span>Eu sou uma</span>
+      <Forms />
       <Table />
     </div>
   );

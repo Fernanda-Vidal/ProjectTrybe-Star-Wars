@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import Page from './component/Page';
-import { Provider } from './context/StarContext';
+import Page from './page/Page';
+import { Provider } from './context/StarWarsContext';
 
 function App() {
   return (

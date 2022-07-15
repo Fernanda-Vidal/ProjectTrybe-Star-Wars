@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
-import { StarContext } from '../context/StarContext';
+import { StarWarsContext } from '../context/StarWarsContext';
+import ByPlanet from './ByPlanet';
 // import fetchAPI from '../helpers/fetchApi';
 
 function Table() {
-  const { dataState } = useContext(StarContext);
+  const { data, filterByName } = useContext(StarWarsContext);
 
   return (
     <div>
-      <span>tabela</span>
+      <header>PROJETO STAR WARS - TRYBE</header>
       <table>
         <tr>
           <th>Name</th>
@@ -24,21 +25,22 @@ function Table() {
           <th>Edited</th>
           <th>URL</th>
         </tr>
-        {dataState?.map((planet, i) => (
+        { filterByName.name && <ByPlanet /> }
+        {!filterByName.name && data?.map((planetItem, i) => (
           <tr key={ i + 1 }>
-            <td>{planet.name}</td>
-            <td>{planet.rotation_period}</td>
-            <td>{planet.orbital_period}</td>
-            <td>{planet.diameter}</td>
-            <td>{planet.climate}</td>
-            <td>{planet.gravity}</td>
-            <td>{planet.terrain}</td>
-            <td>{planet.surface_water}</td>
-            <td>{planet.population}</td>
-            <td>{planet.films}</td>
-            <td>{planet.created}</td>
-            <td>{planet.edited}</td>
-            <td>{planet.url}</td>
+            <td>{planetItem.name}</td>
+            <td>{planetItem.rotation_period}</td>
+            <td>{planetItem.orbital_period}</td>
+            <td>{planetItem.diameter}</td>
+            <td>{planetItem.climate}</td>
+            <td>{planetItem.gravity}</td>
+            <td>{planetItem.terrain}</td>
+            <td>{planetItem.surface_water}</td>
+            <td>{planetItem.population}</td>
+            <td>{planetItem.films}</td>
+            <td>{planetItem.created}</td>
+            <td>{planetItem.edited}</td>
+            <td>{planetItem.url}</td>
           </tr>
         ))}
       </table>
