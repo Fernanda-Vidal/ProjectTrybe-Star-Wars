@@ -1,14 +1,17 @@
 import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
 import ByPlanet from './ByPlanet';
-// import fetchAPI from '../helpers/fetchApi';
+import Forms from './Forms';
 
 function Table() {
   const { data, filterByName } = useContext(StarWarsContext);
 
   return (
     <div>
-      <header>PROJETO STAR WARS - TRYBE</header>
+      <header>
+        <h1>PROJETO STAR WARS - TRYBE</h1>
+        <Forms />
+      </header>
       <table>
         <tr>
           <th>Name</th>

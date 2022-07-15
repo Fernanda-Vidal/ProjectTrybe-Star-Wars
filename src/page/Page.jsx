@@ -1,11 +1,11 @@
 import React from 'react';
-import Forms from '../component/Forms';
+// import Forms from '../component/Forms';
 import Table from '../component/Table';
 
 function Page() {
   return (
     <div>
-      <Forms />
+      {/* <Forms /> */}
       <Table />
     </div>
   );
