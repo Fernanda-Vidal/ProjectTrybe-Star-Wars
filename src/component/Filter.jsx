@@ -5,26 +5,40 @@ function Filter() {
   const {
     filterByNumericValue,
     notIsFiltered,
+    // isFiltered,
     removeFilter,
-    addColumm,
-    arrayColumm } = useContext(StarWarsContext);
+    changeArrayColumm,
+    arrayColumm,
+    setColummFilter,
+    colummFilter,
+  } = useContext(StarWarsContext);
 
-  const handleClickRemove = (filter) => {
+  const handleClickRemove = (filter, type) => {
     removeFilter(filter);
-    console.log(filterByNumericValue);
-    addColumm(arrayColumm.concat(filter));
-    if (filterByNumericValue.length === 0) {
-      notIsFiltered()
+    changeArrayColumm(filter, type);
+    console.log(filterByNumericValue.length);
+    console.log(arrayColumm);
+    if (filterByNumericValue.length === 1) {
+      notIsFiltered();
+    }
+    if (arrayColumm.length === 1) {
+      setColummFilter(colummFilter[1]);
     }
   };
   return (
     <div>
-      { filterByNumericValue?.map(({ columm, comparison, value }, index) => (
+      { filterByNumericValue && filterByNumericValue
+        .map(({ columm, comparison, value = 0 }, index) => (
           <div key={ index + 1 }>
             <span data-testid="filter">
-              { ` ${columm} ${comparison} ${value} ` }
+              { `${columm} ${comparison} ${value}` }
             </span>
-            <button type="button" onClick={ () => handleClickRemove(columm) }>X</button>
+            <button
+              type="button"
+              onClick={ () => handleClickRemove(columm, 'add') }
+            >
+              X
+            </button>
           </div>
         )) }
     </div>

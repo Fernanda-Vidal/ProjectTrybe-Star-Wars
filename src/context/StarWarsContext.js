@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import propTypes, { number } from 'prop-types';
+import propTypes from 'prop-types';
 import fetchAPI from '../helpers/fetchApi';
 
 const StarWarsContext = createContext();
@@ -14,6 +14,7 @@ function ProviderStarWars({ children }) {
     'diameter',
     'rotation_period',
     'surface_water']);
+  const [colummFilter, setColummFilter] = useState('population');
 
   useEffect(() => {
     const getPlanets = async () => {
@@ -28,23 +29,22 @@ function ProviderStarWars({ children }) {
   const addFilterName = (newPlanet) => {
     setFilterByName({ name: newPlanet });
   };
-
-  const addColumm = (columm) => {
-    setArrayColumm(columm);
+  const changeArrayColumm = (columm, type) => {
+    if (type === 'add') {
+      setArrayColumm(arrayColumm.concat(columm));
+    } else {
+      setArrayColumm(arrayColumm.filter((item) => item !== columm));
+    }
   };
 
-  const removeColumm = (columm) => {
-    setArrayColumm(arrayColumm.filter((item) => item !== columm));
-  };
-
-  const changeFilter = (columm, comparison, value) => {
+  const changeFilter = (columm, comparison, value, type) => {
     // console.log(filterByNumericValue);
     setFilterByNumericValue(filterByNumericValue.concat({
       columm,
       comparison,
       value,
     }));
-    removeColumm(columm);
+    changeArrayColumm(columm, type);
     // }
   };
 
@@ -63,18 +63,20 @@ function ProviderStarWars({ children }) {
     let returnArray = [];
     filters.forEach((item) => {
       const [columm, comparison, value] = item;
-      if (comparison === 'maior que') {
+      if (comparison === 'maior que' && !(Number.isNaN(value))) {
         returnArray = data.filter((planet) => (
-          !(Number.isNaN(value)) && Number(planet[columm]) > Number(value)));
+          /*! (Number.isNaN(value)) && */
+          Number(planet[columm]) > Number(value)));
         // console.log(returnArray);
-      } else if (comparison === 'menor que') {
+      } else if (comparison === 'menor que' && !(Number.isNaN(value))) {
         returnArray = data.filter((planet) => (
-          !(Number.isNaN(value)) && Number(planet[columm]) < Number(value)));
+          /*! (Number.isNaN(value)) */ Number(planet[columm]) < Number(value)));
         return returnArray;
-      } else {
+      } else if (comparison === 'igual a' && !(Number.isNaN(value))) {
         returnArray = data.filter((planet) => Number(planet[columm]) === Number(value));
       }
     });
+    console.log(returnArray);
     return returnArray;
   };
 
@@ -89,8 +91,10 @@ function ProviderStarWars({ children }) {
     notIsFiltered,
     isFiltered,
     arrayColumm,
-    addColumm,
+    changeArrayColumm,
     planetFilteredByNumericValue,
+    colummFilter,
+    setColummFilter,
   };
 
   return (

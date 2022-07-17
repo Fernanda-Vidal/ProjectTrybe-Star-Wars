@@ -7,20 +7,23 @@ function FormsFilters() {
     addIsFiltered,
     isFiltered,
     arrayColumm,
-    planetFilteredByNumericValue,
+    colummFilter,
+    setColummFilter,
+    // planetFilteredByNumericValue,
   } = useContext(StarWarsContext);
 
-  const [colummFilter, setColummFilter] = useState('population');
+  // const [colummFilter, setColummFilter] = useState('population');
   const [comparisonFilter, setComparisonFilter] = useState('maior que');
   const [valueFilter, setValueFilter] = useState(0);
 
-  const handleClickFilter = () => {
-    // if (colummFilter && comparisonFilter && valueFilter) {
-      changeFilter(colummFilter, comparisonFilter, valueFilter);
+  const handleClickFilter = (type) => {
+    if (colummFilter && comparisonFilter) {
+      changeFilter(colummFilter, comparisonFilter, valueFilter, type);
       addIsFiltered();
+      console.log('arrayColumm[0]', arrayColumm[0]);
+      console.log('arrayColumm[1]', arrayColumm[1]);
       setColummFilter(arrayColumm[1]);
-      // planetFilteredByNumericValue();
-    // }
+    }
   };
 
   const generateOptions = (array) => (
@@ -51,7 +54,7 @@ function FormsFilters() {
         >
           { generateOptions(['maior que', 'menor que', 'igual a'])}
         </select>
-        { console.log(comparisonFilter)}
+        {/* { console.log(comparisonFilter)} */}
       </label>
       <label htmlFor="value-filter">
         <input
@@ -60,17 +63,23 @@ function FormsFilters() {
           value={ valueFilter }
           onChange={ (ev) => setValueFilter(ev.target.value) }
         />
-        { console.log(valueFilter)}
+        {/* { console.log(valueFilter)} */}
       </label>
       <button
         type="button"
         data-testid="button-filter"
-        onClick={ () => handleClickFilter() }
+        onClick={ () => handleClickFilter('remove') }
       >
         FILTRAR
       </button>
+      <button
+        type="button"
+        data-testid="button-remove-filters"
+      >
+        REMOVER TODOS OS FILTROS
+      </button>
       {/* { console.log(filterByNumericValue)} */}
-      {/* { console.log(isFiltered)} */}
+      { console.log(isFiltered)}
     </form>
   );
 }
