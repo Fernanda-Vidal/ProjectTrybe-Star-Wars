@@ -13,7 +13,9 @@ function Filter() {
     removeFilter(filter);
     console.log(filterByNumericValue);
     addColumm(arrayColumm.concat(filter));
-
+    if (filterByNumericValue.length === 0) {
+      notIsFiltered()
+    }
   };
   return (
     <div>

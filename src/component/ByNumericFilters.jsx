@@ -4,31 +4,6 @@ import { StarWarsContext } from '../context/StarWarsContext';
 function ByNumericFilters() {
   const { planetFilteredByNumericValue } = useContext(StarWarsContext);
 
-  // const planetFilteredByNumericValue = () => {
-  //   const filters = filterByNumericValue.map((filter) => Object.values(filter))
-  //     .filter((_item, i) => i !== 0);
-  //   // console.log(filters);
-  //   let returnArray = '';
-  //   filters.forEach((item) => {
-  //     const [columm, comparison, value] = item;
-  //     // data.filter((planet) => (
-  //     // returnArray.push(Number(planet[columm]))
-  //     if (comparison === 'maior que') {
-  //       returnArray = data.filter((planet) => Number(planet[columm]) > Number(value));
-  //       // return returnArray;
-  //     } else if (comparison === 'menor que') {
-  //       returnArray = data.filter((planet) => Number(planet[columm]) < Number(value));
-  //       return returnArray;
-  //     } else {
-  //       returnArray = data.filter((planet) => Number(planet[columm]) === Number(value));
-  //     }
-  //     // console.log(returnArray);
-  //   });
-  //   return returnArray;
-  // };
-
-  // };
-
   return (
     <table>
       <tr>
