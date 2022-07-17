@@ -1,21 +1,35 @@
 import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
-import ByPlanet from './ByPlanet';
-import FilterColumm from './FilterColumm';
+import ByPlanetName from './ByPlanetName';
+import ByNumericFilters from './ByNumericFilters';
+import Filter from './Filter';
 import FilterName from './FilterName';
+import FormsFilters from './FormsFilters';
 
 function Table() {
-  const { data, filterByName } = useContext(StarWarsContext);
+  const {
+    data,
+    filterByName,
+    isFiltered,
+  } = useContext(StarWarsContext);
 
   return (
     <div>
       <header>
         <h1>PROJETO STAR WARS - TRYBE</h1>
         <FilterName />
-        <FilterColumm />
+        <FormsFilters />
+        <br />
+        { isFiltered && (
+          <div>
+            <Filter />
+            <ByNumericFilters />
+          </div>
+        )}
       </header>
-      { filterByName.name && <ByPlanet /> }
-      { !filterByName.name
+      <br />
+      { filterByName.name && <ByPlanetName /> }
+      { (!filterByName.name && !isFiltered)
       && (
         <table>
           <tr>

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
 
-function ByPlanet() {
+function ByPlanetName() {
   const { data, filterByName } = useContext(StarWarsContext);
 
-  const planetFiltered = () => data
+  const planetFilteredByName = () => data
     .filter((planet) => planet.name.includes(filterByName.name));
 
   return (
@@ -24,7 +24,7 @@ function ByPlanet() {
         <th>Edited</th>
         <th>URL</th>
       </tr>
-      { planetFiltered()?.map((filtered, i) => (
+      { planetFilteredByName()?.map((filtered, i) => (
         <tr key={ i + 1 }>
           <td>{filtered.name}</td>
           <td>{filtered.rotation_period}</td>
@@ -45,4 +45,4 @@ function ByPlanet() {
   );
 }
 
-export default ByPlanet;
+export default ByPlanetName;
