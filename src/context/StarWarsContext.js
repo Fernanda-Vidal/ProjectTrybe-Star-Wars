@@ -6,6 +6,7 @@ const StarWarsContext = createContext();
 
 function ProviderStarWars({ children }) {
   const [data, setData] = useState([]);
+  const [filterByName, setFilterByName] = useState({ name });
 
   useEffect(() => {
     const getPlanets = async () => {
@@ -14,12 +15,17 @@ function ProviderStarWars({ children }) {
       // Pesquisa em https://pt.stackoverflow.com/questions/55568/remover-uma-propriedade-de-um-objeto-contido-numa-array#:~:text=Voc%C3%AA%20pode%20usar%20o%20delete,objetos%20dentro%20da%20array%20bola%20.
       setData(newData.filter((planet) => delete planet.residents));
     };
-    console.log(data);
     getPlanets();
   }, []);
 
+  const changeFilterByName = (name) => {
+    setFilterByName(name);
+  };
+
   const context = {
     data,
+    filterByName,
+    changeFilterByName,
   };
 
   return (
