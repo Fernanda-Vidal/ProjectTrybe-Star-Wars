@@ -1,3 +1,10 @@
+// const setReturnAPI = (string) => {
+//   const array = string.split('_');
+//   return array.join(' ');
+// };
+
+// setReturnAPI('rotation_period');
+
 const fetchAPI = async () => {
   const url = 'https://swapi-trybe.herokuapp.com/api/planets/';
 
@@ -7,6 +14,7 @@ const fetchAPI = async () => {
     .catch((error) => error);
 
   // console.log(item);
+
   return item;
 };
 

@@ -1,13 +1,13 @@
 import React from 'react';
-// import Forms from '../component/Forms';
 import Table from '../component/Table';
 
-function Page() {
+function Main() {
   return (
     <div>
+      <h1>Projeto Star Wars - Trybe</h1>
       <Table />
     </div>
   );
 }
 
-export default Page;
+export default Main;

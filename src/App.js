@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import Page from './page/Page';
 import { Provider } from './context/StarWarsContext';
+import Main from './page/Main';
 
 function App() {
   return (
     <Provider>
-      <Page />
+      <Main />
     </Provider>
   );
 }
