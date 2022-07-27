@@ -3,7 +3,13 @@ import { StarWarsContext } from '../context/StarWarsContext';
 import FormsInput from './FormsInput';
 
 function Table() {
-  const { data } = useContext(StarWarsContext);
+  const { data, filterByName } = useContext(StarWarsContext);
+
+  const addFilter = (list) => {
+    let newList = [...list];
+    newList = newList.filter((item) => item.name.includes(filterByName.name));
+    return newList;
+  };
 
   return (
     <main>
@@ -26,25 +32,26 @@ function Table() {
             <th>URL</th>
           </tr>
         </thead>
-        { data && data.map((planet, i) => (
-          <tr key={ i + 1 }>
-            <td>{ planet.name }</td>
-            <td>
-              { planet.rotation_period }
-            </td>
-            <td>{ planet.orbital_period }</td>
-            <td>{ planet.climate }</td>
-            <td>{ planet.diameter }</td>
-            <td>{ planet.gravity }</td>
-            <td>{ planet.terrain }</td>
-            <td>{ planet.surface_water }</td>
-            <td>{ planet.population }</td>
-            <td>{ planet.films }</td>
-            <td>{ planet.created }</td>
-            <td>{ planet.edited }</td>
-            <td>{ planet.url }</td>
-          </tr>
-        ))}
+        { addFilter(data)
+          .map((planet, i) => (
+            <tr key={ i + 1 }>
+              <td>{ planet.name }</td>
+              <td>
+                { planet.rotation_period }
+              </td>
+              <td>{ planet.orbital_period }</td>
+              <td>{ planet.climate }</td>
+              <td>{ planet.diameter }</td>
+              <td>{ planet.gravity }</td>
+              <td>{ planet.terrain }</td>
+              <td>{ planet.surface_water }</td>
+              <td>{ planet.population }</td>
+              <td>{ planet.films }</td>
+              <td>{ planet.created }</td>
+              <td>{ planet.edited }</td>
+              <td>{ planet.url }</td>
+            </tr>
+          ))}
       </table>
     </main>
   );

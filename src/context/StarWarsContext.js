@@ -6,7 +6,7 @@ const StarWarsContext = createContext();
 
 function ProviderStarWars({ children }) {
   const [data, setData] = useState([]);
-  const [filterByName, setFilterByName] = useState({ name });
+  const [filterByName, setFilterByName] = useState({ name: '' });
 
   useEffect(() => {
     const getPlanets = async () => {
@@ -19,9 +19,9 @@ function ProviderStarWars({ children }) {
   }, []);
 
   const changeFilterByName = (name) => {
-    setFilterByName(name);
+    setFilterByName({ name });
   };
-
+  console.log(filterByName);
   const context = {
     data,
     filterByName,
