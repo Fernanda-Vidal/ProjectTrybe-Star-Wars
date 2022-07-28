@@ -4,12 +4,14 @@ import fetchAPI from '../helpers/fetchApi';
 
 const StarWarsContext = createContext();
 
+const INITIAL_STATE = [
+  'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+
 function ProviderStarWars({ children }) {
   const [data, setData] = useState([]);
   const [filterByName, setFilterByName] = useState({ name: '' });
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
-  const [optionsColumn, setOptionsColumn] = useState([
-    'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
+  const [optionsColumn, setOptionsColumn] = useState(INITIAL_STATE);
 
   useEffect(() => {
     const getPlanets = async () => {
@@ -42,14 +44,19 @@ function ProviderStarWars({ children }) {
 
     changeOptionsColumn(column, 'remove');
   };
-  // console.log(filterByNumericValues);
 
   const removeFilter = (filtro) => {
     setFilterByNumericValues(filterByNumericValues
       .filter(({ column }) => column !== filtro));
     changeOptionsColumn(filtro, 'add');
   };
-  // console.log(optionsColumn);
+    // console.log(optionsColumn);
+
+  const removeAllNumericFilters = () => {
+    setFilterByNumericValues([]);
+    setOptionsColumn(INITIAL_STATE);
+  };
+  console.log(filterByNumericValues);
 
   const context = {
     data,
@@ -58,6 +65,7 @@ function ProviderStarWars({ children }) {
     filterByNumericValues,
     changeFilterByNumericValues,
     removeFilter,
+    removeAllNumericFilters,
     optionsColumn,
     changeOptionsColumn,
   };

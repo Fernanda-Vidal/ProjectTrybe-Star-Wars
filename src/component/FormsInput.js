@@ -7,6 +7,7 @@ function FormsInput() {
     filterByNumericValues,
     changeFilterByNumericValues,
     removeFilter,
+    removeAllNumericFilters,
     optionsColumn,
     changeOptionsColumn } = useContext(StarWarsContext);
   const [category, setCategory] = useState('population');
@@ -91,6 +92,13 @@ function FormsInput() {
           onClick={ () => handleClick(category, operand, number) }
         >
           FILTRAR
+        </button>
+        <button
+          type="button"
+          data-testid="button-remove-filters"
+          onClick={ () => removeAllNumericFilters() }
+        >
+          REMOVER FILTROS
         </button>
       </form>
     </header>
