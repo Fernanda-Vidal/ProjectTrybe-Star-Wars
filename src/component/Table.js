@@ -3,11 +3,24 @@ import { StarWarsContext } from '../context/StarWarsContext';
 import FormsInput from './FormsInput';
 
 function Table() {
-  const { data, filterByName } = useContext(StarWarsContext);
+  const { data, filterByName, filterByNumericValues } = useContext(StarWarsContext);
 
   const addFilter = (list) => {
     let newList = [...list];
-    newList = newList.filter((item) => item.name.includes(filterByName.name));
+    newList = newList.filter((planet) => planet.name.includes(filterByName.name));
+    filterByNumericValues.forEach(({ column, comparison, value }) => {
+      const number = parseInt(value, 10);
+      newList = newList.filter((planet) => {
+        const planetColumn = parseInt(planet[column], 10);
+        if (comparison === 'maior que') {
+          return planetColumn > number;
+        }
+        if (comparison === 'menor que') {
+          return planetColumn < number;
+        }
+        return planetColumn === number;
+      });
+    });
     return newList;
   };
 
