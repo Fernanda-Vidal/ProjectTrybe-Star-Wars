@@ -28,26 +28,36 @@ function ProviderStarWars({ children }) {
     setFilterByName({ name });
   };
 
-  const changeFilterByNumericValues = (column, comparison, value) => {
-    setFilterByNumericValues([...filterByNumericValues, {
-      column, comparison, value }]);
-  };
-
   const changeOptionsColumn = (column, arg) => {
-    if (arg === 'add') {
+    if (arg === 'remove') {
       setOptionsColumn(optionsColumn.filter((option) => option !== column));
     } else {
       setOptionsColumn([...optionsColumn, column]);
     }
   };
 
+  const changeFilterByNumericValues = (column, comparison, value, type) => {
+    setFilterByNumericValues([...filterByNumericValues, {
+      column, comparison, value }]);
+
+    changeOptionsColumn(column, type);
+  };
   // console.log(filterByNumericValues);
+
+  const removeFilter = (filtro) => {
+    setFilterByNumericValues(filterByNumericValues
+      .filter(({ column }) => column !== filtro));
+    changeOptionsColumn(filtro, 'add');
+  };
+  console.log('filterByNumericValues', filterByNumericValues);
+
   const context = {
     data,
     filterByName,
     changeFilterByName,
     filterByNumericValues,
     changeFilterByNumericValues,
+    removeFilter,
     optionsColumn,
     changeOptionsColumn,
   };

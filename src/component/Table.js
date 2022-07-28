@@ -53,8 +53,8 @@ function Table() {
                 { planet.rotation_period }
               </td>
               <td>{ planet.orbital_period }</td>
-              <td>{ planet.climate }</td>
               <td>{ planet.diameter }</td>
+              <td>{ planet.climate }</td>
               <td>{ planet.gravity }</td>
               <td>{ planet.terrain }</td>
               <td>{ planet.surface_water }</td>

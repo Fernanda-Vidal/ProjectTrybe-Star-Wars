@@ -6,6 +6,7 @@ function FormsInput() {
     changeFilterByName,
     filterByNumericValues,
     changeFilterByNumericValues,
+    removeFilter,
     optionsColumn,
     changeOptionsColumn } = useContext(StarWarsContext);
   const [category, setCategory] = useState('population');
@@ -16,9 +17,14 @@ function FormsInput() {
     <option value={ option } key={ Math.random() }>{ option }</option>
   ));
 
-  const handleClick = () => {
-    changeFilterByNumericValues(category, operand, number);
-    changeOptionsColumn(category, 'add');
+  const handleClick = (categoryFilter, operandFilter, numberFilter) => {
+    changeFilterByNumericValues(categoryFilter, operandFilter, numberFilter, 'remove');
+    setCategory(optionsColumn[1]);
+  };
+
+  const handleClickRemove = (column) => {
+    removeFilter(column);
+    console.log('category', column);
   };
 
   return (
@@ -29,9 +35,7 @@ function FormsInput() {
           <span>{`${column} ${comparison} ${value}`}</span>
           <button
             type="button"
-            onChange={ () => {
-              changeOptionsColumn(column, 'clear');
-            } }
+            onClick={ () => handleClickRemove(column) }
           >
             X
           </button>
@@ -82,7 +86,7 @@ function FormsInput() {
         <button
           type="button"
           data-testid="button-filter"
-          onClick={ handleClick }
+          onClick={ () => handleClick(category, operand, number) }
         >
           FILTRAR
         </button>
