@@ -36,11 +36,11 @@ function ProviderStarWars({ children }) {
     }
   };
 
-  const changeFilterByNumericValues = (column, comparison, value, type) => {
+  const changeFilterByNumericValues = (column, comparison, value) => {
     setFilterByNumericValues([...filterByNumericValues, {
       column, comparison, value }]);
 
-    changeOptionsColumn(column, type);
+    changeOptionsColumn(column, 'remove');
   };
   // console.log(filterByNumericValues);
 
@@ -49,7 +49,7 @@ function ProviderStarWars({ children }) {
       .filter(({ column }) => column !== filtro));
     changeOptionsColumn(filtro, 'add');
   };
-  console.log('filterByNumericValues', filterByNumericValues);
+  // console.log(optionsColumn);
 
   const context = {
     data,

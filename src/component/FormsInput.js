@@ -12,26 +12,27 @@ function FormsInput() {
   const [category, setCategory] = useState('population');
   const [operand, setOperand] = useState('maior que');
   const [number, setNumber] = useState(0);
+  // const [isDisabled, setIsDisabled] = useState(false);
 
   const generateSelect = (array) => array.map((option) => (
     <option value={ option } key={ Math.random() }>{ option }</option>
   ));
 
   const handleClick = (categoryFilter, operandFilter, numberFilter) => {
-    changeFilterByNumericValues(categoryFilter, operandFilter, numberFilter, 'remove');
+    changeFilterByNumericValues(categoryFilter, operandFilter, numberFilter);
     setCategory(optionsColumn[1]);
   };
 
   const handleClickRemove = (column) => {
     removeFilter(column);
-    console.log('category', column);
+    // console.log('category', column);
   };
 
   return (
     <header>
       { filterByNumericValues
       && filterByNumericValues.map(({ column, comparison, value }) => (
-        <div key={ Math.random() }>
+        <div data-testid="filter" key={ Math.random() }>
           <span>{`${column} ${comparison} ${value}`}</span>
           <button
             type="button"
@@ -86,6 +87,7 @@ function FormsInput() {
         <button
           type="button"
           data-testid="button-filter"
+          disabled={ !(optionsColumn.length) }
           onClick={ () => handleClick(category, operand, number) }
         >
           FILTRAR
