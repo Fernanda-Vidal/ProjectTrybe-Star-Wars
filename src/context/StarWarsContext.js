@@ -8,6 +8,8 @@ function ProviderStarWars({ children }) {
   const [data, setData] = useState([]);
   const [filterByName, setFilterByName] = useState({ name: '' });
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
+  const [optionsColumn, setOptionsColumn] = useState([
+    'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
 
   useEffect(() => {
     const getPlanets = async () => {
@@ -31,6 +33,14 @@ function ProviderStarWars({ children }) {
       column, comparison, value }]);
   };
 
+  const changeOptionsColumn = (column, arg) => {
+    if (arg === 'add') {
+      setOptionsColumn(optionsColumn.filter((option) => option !== column));
+    } else {
+      setOptionsColumn([...optionsColumn, column]);
+    }
+  };
+
   // console.log(filterByNumericValues);
   const context = {
     data,
@@ -38,6 +48,8 @@ function ProviderStarWars({ children }) {
     changeFilterByName,
     filterByNumericValues,
     changeFilterByNumericValues,
+    optionsColumn,
+    changeOptionsColumn,
   };
 
   return (
