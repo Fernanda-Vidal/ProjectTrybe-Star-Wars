@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
+import FilterOrder from './FilterOrder';
 import FormsInput from './FormsInput';
 
 function Table() {
-  const { data, filterByName, filterByNumericValues } = useContext(StarWarsContext);
+  const {
+    data, filterByName, filterByNumericValues, order } = useContext(StarWarsContext);
 
   const addFilter = (list) => {
     let newList = [...list];
@@ -24,9 +26,29 @@ function Table() {
     return newList;
   };
 
+  //  Pesquisa realizada: https://pt.stackoverflow.com/questions/46600/como-ordenar-uma-array-de-objetos-com-array-sort
+  const ordenerList = (a, b) => {
+    const filtro = order.column;
+    const number = -1;
+    if (order.sort === 'ASC') {
+      if (parseInt(a[filtro], 10) < parseInt(b[filtro], 10)) { return number; }
+      if (parseInt(a[filtro], 10) > parseInt(b[filtro], 10)) { return 1; }
+      return 0;
+    }
+    if (order.sort === 'DESC') {
+      if (parseInt(a[filtro], 10) > parseInt(b[filtro], 10)) { return number; }
+      if (parseInt(a[filtro], 10) < parseInt(b[filtro], 10)) { return 1; }
+      return 0;
+    }
+    if (a.name < b.name) { return number; }
+    if (a.name > b.name) { return 1; }
+    return 0;
+  };
+
   return (
     <main>
       <FormsInput />
+      <FilterOrder />
       <table>
         <thead>
           <tr>
@@ -45,10 +67,10 @@ function Table() {
             <th>URL</th>
           </tr>
         </thead>
-        { addFilter(data)
+        { addFilter(data).sort(ordenerList)
           .map((planet, i) => (
             <tr key={ i + 1 }>
-              <td>{ planet.name }</td>
+              <td data-testId="planet-name">{ planet.name }</td>
               <td>
                 { planet.rotation_period }
               </td>
