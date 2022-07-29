@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
-import FilterOrder from './FilterOrder';
-import FormsInput from './FormsInput';
 
 function Table() {
   const {
@@ -47,8 +45,6 @@ function Table() {
 
   return (
     <main>
-      <FormsInput />
-      <FilterOrder />
       <table>
         <thead>
           <tr>

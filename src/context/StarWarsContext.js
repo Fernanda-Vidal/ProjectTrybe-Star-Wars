@@ -14,7 +14,7 @@ function ProviderStarWars({ children }) {
   const [order, setOrder] = useState({});
 
   const [optionsColumn, setOptionsColumn] = useState(INITIAL_STATE);
-  const [optionsOrder, setOptionsOrder] = useState(INITIAL_STATE);
+  const [optionsOrder] = useState(INITIAL_STATE);
 
   useEffect(() => {
     const getPlanets = async () => {
@@ -52,7 +52,6 @@ function ProviderStarWars({ children }) {
       .filter(({ column }) => column !== filtro));
     changeOptionsColumn(filtro, 'add');
   };
-    // console.log(optionsColumn);
 
   const removeAllNumericFilters = () => {
     setFilterByNumericValues([]);
@@ -63,7 +62,6 @@ function ProviderStarWars({ children }) {
     setOrder({ column, sort });
   };
 
-  // console.log(order);
   const context = {
     data,
     filterByName,

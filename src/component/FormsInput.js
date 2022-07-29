@@ -8,12 +8,10 @@ function FormsInput() {
     changeFilterByNumericValues,
     removeFilter,
     removeAllNumericFilters,
-    optionsColumn,
-    changeOptionsColumn } = useContext(StarWarsContext);
+    optionsColumn } = useContext(StarWarsContext);
   const [category, setCategory] = useState('population');
   const [operand, setOperand] = useState('maior que');
   const [number, setNumber] = useState(0);
-  // const [isDisabled, setIsDisabled] = useState(false);
 
   const generateSelect = (array) => array.map((option) => (
     <option value={ option } key={ Math.random() }>{ option }</option>
@@ -26,7 +24,6 @@ function FormsInput() {
 
   const handleClickRemove = (column) => {
     removeFilter(column);
-    // console.log('category', column);
   };
 
   return (

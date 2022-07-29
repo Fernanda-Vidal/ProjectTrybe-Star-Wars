@@ -17,7 +17,6 @@ function FilterOrder() {
     changeOrder(columnOrder, radioOrder);
   };
 
-  //   console.log(columnOrder);
   return (
     <form>
       <label htmlFor="Order">
