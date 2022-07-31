@@ -5,8 +5,8 @@ import userEvent from '@testing-library/user-event';
 
 describe('Testa todos os filtros da aplicação', () => {
 
-  beforeEach(() => {
-    render(<App />);
+  beforeEach( async () => {
+    await render(<App />);
   })
   
   it('1 - Verifica renderização sem inserir nenhum filtro', async () => {
@@ -23,7 +23,11 @@ describe('Testa todos os filtros da aplicação', () => {
     expect(dagobah).toBeInTheDocument();
   });
 
-  it('3 - Verifica renderização utilizando o filtro numérico e botões "filtrar" e "X"', async () => {
+  it('3 - Verifica se é possível escrever no campo inputName', async () => {
+    userEvent.type(screen.getByRole('textbox'), 'aa');
+  })
+
+  it('4 - Verifica renderização utilizando o filtro numérico e botões "filtrar" e "X"', async () => {
     const inputNumber = screen.getByRole('spinbutton');
     expect(inputNumber).toBeInTheDocument();
 
@@ -41,7 +45,7 @@ describe('Testa todos os filtros da aplicação', () => {
     expect(filtro).not.toBeInTheDocument();
   });
   
-  it('4 - Verifica botão "remover filtros" ', () => {
+  it('5 - Verifica botão "remover filtros" ', () => {
     const inputNumber = screen.getByRole('spinbutton');
     const buttonFilter = screen.getByTestId('button-filter')
     
@@ -56,16 +60,22 @@ describe('Testa todos os filtros da aplicação', () => {
     expect(filtro).not.toBeInTheDocument();
   });
 
-  it('5 - Verifica operador de comparação', async () => {
+  it('6 - Verifica operador de comparação', async () => {
     const operand = screen.getByTestId('comparison-filter')
     expect(operand).toBeInTheDocument();
+    expect(operand).toHaveLength(3)
 
+    const columnFilter = screen.getByTestId('column-filter')
+    expect(columnFilter).toBeInTheDocument();
+    expect(columnFilter).toHaveLength(5)
   });
 
-  it('6 - Verifica ordenação ascendente', async () => {
-    const radioAsc = screen.getByTestId('column-sort-input-desc')
+  it('7 - Verifica ordenação ascendente', async () => {
+    const selectColumn = screen.getByTestId('column-sort')
+    const radioAsc = screen.getByTestId('column-sort-input-asc')
     const buttonOrder = screen.getByTestId('column-sort-button')
 
+    expect(selectColumn).toBeInTheDocument();
     userEvent.click(radioAsc);
     userEvent.click(buttonOrder);
 
@@ -73,7 +83,7 @@ describe('Testa todos os filtros da aplicação', () => {
     expect(yavin).toBeInTheDocument();
   });
 
-  it('7 - Verifica ordenação descendente', async () => {
+  it('8 - Verifica ordenação descendente', async () => {
     const radioDesc = screen.getByTestId('column-sort-input-desc')
     const buttonOrder = screen.getByTestId('column-sort-button')
 
@@ -83,5 +93,4 @@ describe('Testa todos os filtros da aplicação', () => {
     const coruscant = await screen.findByText(/coruscant/i);
     expect(coruscant).toBeInTheDocument();
   });
-
 })

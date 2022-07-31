@@ -19,11 +19,12 @@ function ProviderStarWars({ children }) {
   useEffect(() => {
     const getPlanets = async () => {
       const dataAPI = await fetchAPI();
-      let newData = [...dataAPI];
+      const newData = [...dataAPI];
 
       // Pesquisa em https://pt.stackoverflow.com/questions/55568/remover-uma-propriedade-de-um-objeto-contido-numa-array#:~:text=Voc%C3%AA%20pode%20usar%20o%20delete,objetos%20dentro%20da%20array%20bola%20.
-      newData = newData.filter((item) => delete item.residents);
-      setData(newData.filter((planet) => delete planet.residents));
+      // newData = newData.filter((item) => delete item.residents);
+      // setData(newData.filter((planet) => delete planet.residents));
+      setData(newData);
     };
     getPlanets();
   }, []);
