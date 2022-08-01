@@ -14,7 +14,13 @@ function FormsInput() {
   const [number, setNumber] = useState(0);
 
   const generateSelect = (array) => array.map((option) => (
-    <option value={ option } key={ Math.random() }>{ option }</option>
+    <option
+      data-testid="column-options"
+      value={ option }
+      key={ Math.random() }
+    >
+      { option }
+    </option>
   ));
 
   const handleClick = (categoryFilter, operandFilter, numberFilter) => {

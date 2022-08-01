@@ -66,7 +66,7 @@ function Table() {
         { addFilter(data).sort(ordenerList)
           .map((planet, i) => (
             <tr key={ i + 1 }>
-              <td data-testId="planet-name">{ planet.name }</td>
+              <td data-testid="planet-name">{ planet.name }</td>
               <td>
                 { planet.rotation_period }
               </td>
